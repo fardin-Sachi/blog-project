@@ -1,12 +1,9 @@
 import express from 'express';
-import dotenv from 'dotenv';
-import connectDb from './utils/db.js';
+import connectDb from './config/db.config.js';
 import userRoutes from './routes/user.route.js';
+import ENV from './config/env.config.js';
 
-dotenv.config();
-
-const PORT = process.env.PORT|| 3000;
-
+const PORT = ENV.PORT;
 
 const app = express();
 
@@ -14,7 +11,15 @@ app.use(express.json());
 
 connectDb();
 
-app.use("/api/v1/user", userRoutes);
+// Visualize Request Body
+// app.use((req, res, next) => {
+//   console.log("Incoming request");
+//   console.log("Headers:", req.headers);
+//   console.log("Body:", req.body);
+//   next();
+// });
+
+app.use("/api/v1/users", userRoutes);
 
 
 

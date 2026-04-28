@@ -6,9 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # TypeScript build output
-/dist/
-/build/
-/out/
+**/dist/
+**/build/
+**/out/
 
 # Environment variables
 .env
