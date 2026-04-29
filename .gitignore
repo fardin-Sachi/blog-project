@@ -44,10 +44,6 @@ $RECYCLE.BIN/
 *.sublime-project
 
 # React/Vite front-end build
-/frontend_quickhire/dist/
-frontend_quickhire/node_modules/
-/frontend_quickhire/build/
-/frontend_quickhire/out/
 /frontend_quickhire/lib/
 
 # Next/Vite/other framework caches
@@ -140,3 +136,4 @@ docker-compose.*.local.yml
 # Add any additional local-run or CI-specific files you don't want tracked:
 .local/
 tmp/
+Project Planning - Blog Project.txt
