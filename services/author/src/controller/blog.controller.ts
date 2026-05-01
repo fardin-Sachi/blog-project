@@ -1,4 +1,5 @@
 import { sql } from '../config/db.config.js';
+import { invalidateCacheJob } from '../config/rabbitmq.config.js';
 import type { AuthenticatedRequest } from '../types/authenticatedRequest.js';
 import type { IBlog } from '../types/blog.js';
 import getBuffer from '../utils/dataUri.js';
@@ -35,6 +36,8 @@ export const createBlog = TryCatch(async (req:AuthenticatedRequest, res) => {
   const result = await sql`
     INSERT INTO BLOGS (TITLE, DESCRIPTION, IMAGE, BLOG_CONTENT, CATEGORY, AUTHOR) VALUES (${title}, ${description}, ${cloud.secure_url}, ${blogContent}, ${category}, ${req.user?._id}) RETURNING *;
   `;
+
+  await invalidateCacheJob(["blogs:*"]);
 
   res.status(201).json({
     success: true,
@@ -113,6 +116,7 @@ export const updateBlog = TryCatch(async (req:AuthenticatedRequest, res) => {
     WHERE ID=${id}
     RETURNING *;
   `
+  await invalidateCacheJob([`blogs:*`, `blog:${id}`]);
 
   res.status(201).json({
     success: true,
@@ -170,6 +174,9 @@ export const deleteBlog = TryCatch(async (req:AuthenticatedRequest, res) => {
   await sql`
     DELETE FROM BLOGS WHERE ID=${id};
   `;
+
+  await invalidateCacheJob([`blogs:*`, `blog:${id}`]);
+
   res.status(201).json({
     success:true,
     data: {

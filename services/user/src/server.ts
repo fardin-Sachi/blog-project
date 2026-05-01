@@ -3,12 +3,14 @@ import connectDb from './config/db.config.js';
 import userRoutes from './routes/user.route.js';
 import ENV from './config/env.config.js';
 import cloudinary from './config/cloudinary.config.js';
+import cors from 'cors';
 
 const PORT = ENV.PORT;
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 connectDb();
 cloudinary();
