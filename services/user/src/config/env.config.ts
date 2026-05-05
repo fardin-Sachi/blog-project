@@ -9,6 +9,8 @@ interface IEnv {
   CLOUDINARY_NAME: string,
   CLOUDINARY_API_KEY: string,
   CLOUDINARY_API_SECRET: string,
+  GOOGLE_CLIENT_ID: string,
+  GOOGLE_CLIENT_SECRET: string,
 }
 
 function requireEnv(key: string): string {
@@ -26,6 +28,8 @@ const ENV: IEnv = {
   CLOUDINARY_NAME: requireEnv("CLOUDINARY_NAME"),
   CLOUDINARY_API_KEY: requireEnv("CLOUDINARY_API_KEY"),
   CLOUDINARY_API_SECRET: requireEnv("CLOUDINARY_API_SECRET"),
+  GOOGLE_CLIENT_ID: requireEnv("GOOGLE_CLIENT_ID"),
+  GOOGLE_CLIENT_SECRET: requireEnv("GOOGLE_CLIENT_SECRET"),
 }
 
 export default ENV;
